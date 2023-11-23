@@ -12,9 +12,9 @@ First of all, make sure you're in the `macos` branch.
 
 ```
 brew install SDL SDL_mixer
-cd ImageLib
+cd ImageLib/src
 make
-cd ../BlockOut
+cd ../../BlockOut
 make
 export BL2_HOME=[folder where `images` and `sounds` folders are]
 ./blockout
