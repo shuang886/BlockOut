@@ -47,27 +47,37 @@ else
 SDL_LIBS = /usr/lib/i386-linux-gnu
 endif
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+SDL_LIBS = /opt/homebrew/lib
+LIBOPENGL = -framework OpenGL -framework CoreFoundation -framework AppKit
+MAIN = -lSDLmain
+else
+LIBASOUND = -lasound
+LIBOPENGL = -lGL -lGLU
+endif
+
 CXX		= g++
 
 ifdef _release
 
 CXXFLAGS =     -O2 -Dlinux -c \
-               -I/usr/include/SDL -I../ImageLib/src -I.
+               -I/usr/include/SDL -I/opt/homebrew/include/SDL -I../ImageLib/src -I.
 
 LFLAGS   =      -Wl,--strip-all \
 		$(ADD_LIBS) \
-		-lSDL_mixer -lSDL -lasound \
-		-lGL -lGLU -lpthread -lm -ldl
+		-lSDL_mixer -lSDL $(LIBASOUND) \
+		$(LIBOPENGL) -lpthread -lm -ldl
 
 else
 
 CXXFLAGS =     -g -D_DEBUG -Dlinux -c \
-               -I/usr/include/SDL -I../ImageLib/src -I.
+               -I/usr/include/SDL -I/opt/homebrew/include/SDL -I../ImageLib/src -I.
 
 LFLAGS   =      -L $(SDL_LIBS) \
 		$(ADD_LIBS) \
-		-lSDL_mixer -lSDL -lasound \
-		-lGL -lGLU -lpthread -lm -ldl
+		-lSDL_mixer -lSDL $(LIBASOUND) \
+		$(LIBOPENGL) -lpthread -lm -ldl $(MAIN)
 
 endif
 

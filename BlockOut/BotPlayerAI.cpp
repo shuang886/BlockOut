@@ -15,7 +15,9 @@
   GNU General Public License for more details.
 */
 #include "BotPlayer.h"
+#ifndef __APPLE__
 #include <malloc.h>
+#endif
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

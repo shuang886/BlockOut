@@ -1,4 +1,8 @@
+#ifndef __APPLE__
 #include <malloc.h>
+#else
+#include <stdlib.h>
+#endif
 #include <math.h>
 #include "png/png.h"
 #include "hpng.h"

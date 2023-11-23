@@ -2,7 +2,11 @@
 // 2D sprites
 // -----------------------------------------------
 #include "GLSprite.h"
+#ifndef __APPLE__
 #include <malloc.h>
+#else
+#include <stdlib.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #undef LoadImage

@@ -4,7 +4,11 @@
 /*            Use an ultra fast compression method */
 /***************************************************/
 #include <stdio.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#else
+#include <stdlib.h>
+#endif
 #include <memory.h>
 #include <string.h>
 #include "gif.h"
