@@ -55,6 +55,7 @@ MAIN = -lSDLmain
 else
 LIBASOUND = -lasound
 LIBOPENGL = -lGL -lGLU
+STRIPALL = -Wl,--strip-all
 endif
 
 CXX		= g++
@@ -64,10 +65,10 @@ ifdef _release
 CXXFLAGS =     -O2 -Dlinux -c \
                -I/usr/include/SDL -I/opt/homebrew/include/SDL -I../ImageLib/src -I.
 
-LFLAGS   =      -Wl,--strip-all \
+LFLAGS   =      $(STRIPALL) -L $(SDL_LIBS) \
 		$(ADD_LIBS) \
 		-lSDL_mixer -lSDL $(LIBASOUND) \
-		$(LIBOPENGL) -lpthread -lm -ldl
+		$(LIBOPENGL) -lpthread -lm -ldl $(MAIN)
 
 else
 
