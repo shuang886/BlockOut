@@ -28,6 +28,10 @@
 #define APP_VERSION  "BlockOut 2.5 (x86)"
 #endif
 
+#elif TARGET_OS_MAC
+
+#define APP_VERSION "BlockOut 2.5 (macOS)"
+
 #else
 
 #if __x86_64__ || __ppc64__
