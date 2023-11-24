@@ -42,7 +42,7 @@ int PageChooseSetup::Process(BYTE *keys,float fTime) {
 
   ProcessDefault(keys,fTime);
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
 
     switch( selItem ) {
       case 0:  // Flat Fun
@@ -71,12 +71,12 @@ int PageChooseSetup::Process(BYTE *keys,float fTime) {
         break;
     }
 
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
      mParent->ToPage(&mParent->mainMenuPage);
-     keys[SDLK_ESCAPE] = 0;
+     keys[BO_ESCAPE] = 0;
   }
 
   return 0;

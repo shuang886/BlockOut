@@ -18,6 +18,7 @@
 #include "Game.h"
 #include <time.h>
 #include <ctype.h>
+#include <OpenGL/glu.h>
 
 // Score calculation factors, used by Game::ComputeScore()
 // (coming from measurements made with the original BlockOut game)
@@ -523,10 +524,10 @@ int Game::Process(BYTE *keys,float fTime) {
     case GAME_DEMO: {
 
       // Abort the demo
-      if( keys[SDLK_ESCAPE] ) {
+      if( keys[BO_ESCAPE] ) {
         score.gameTime = curTime - startGameTime;
         gameMode = GAME_OVER;
-        keys[SDLK_ESCAPE]=0;
+        keys[BO_ESCAPE]=0;
         return 2;
       }
 
@@ -870,7 +871,7 @@ void Game::NewPolyCube(BYTE *keys) {
 
    // Reset keys and mode
    if( keys )
-     ZeroMemory( keys, SDLK_LAST * sizeof(BYTE) );
+     ZeroMemory( keys, BO_LAST * sizeof(BYTE) );
    startRotateTime = 0.0f;
    startTranslateTime = 0.0f;
    rotateMode = 0;
@@ -1360,7 +1361,7 @@ void Game::HandleKey(BYTE *keys) {
     keys['p']=0;
   }
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     if( gameMode==GAME_OVER ) {
       // Return to menu
       if( demoFlag || practiceFlag )
@@ -1368,10 +1369,10 @@ void Game::HandleKey(BYTE *keys) {
       else
         exitValue = 1;
     }
-    keys[SDLK_RETURN]=0;
+    keys[BO_RETURN]=0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     // Abort the Game and return to menu
     if( gameMode==GAME_PLAYING ) {
       score.gameTime = curTime - startGameTime;      
@@ -1381,68 +1382,68 @@ void Game::HandleKey(BYTE *keys) {
       exitValue = 2;
     else
       exitValue = 1;
-    keys[SDLK_ESCAPE]=0;
+    keys[BO_ESCAPE]=0;
   }
 
-  if( keys[SDLK_UP] || keys['8'] ) {
+  if( keys[BO_UP] || keys['8'] ) {
     if( StartTranslate(3) ) {
-      keys[SDLK_UP]=0;
+      keys[BO_UP]=0;
       keys['8']=0;
     }
   }
 
-  if( keys[SDLK_DOWN] || keys['2'] ) {
+  if( keys[BO_DOWN] || keys['2'] ) {
     if( StartTranslate(4) ) {
-      keys[SDLK_DOWN]=0;
+      keys[BO_DOWN]=0;
       keys['2']=0;
     }
   }
 
-  if( keys[SDLK_LEFT] || keys['4'] ) {
+  if( keys[BO_LEFT] || keys['4'] ) {
     if( StartTranslate(1) ) {
-      keys[SDLK_LEFT]=0;
+      keys[BO_LEFT]=0;
       keys['4']=0;
     }
   }
 
-  if( keys[SDLK_RIGHT] || keys['6'] ) {
+  if( keys[BO_RIGHT] || keys['6'] ) {
     if( StartTranslate(2) ) {
-      keys[SDLK_RIGHT]=0;
+      keys[BO_RIGHT]=0;
       keys['6']=0;
     }
   }
 
-  if( keys[SDLK_HOME] || keys['7'] ) {
+  if( keys[BO_HOME] || keys['7'] ) {
     if( StartTranslate(5) ) {
-      keys[SDLK_HOME]=0;
+      keys[BO_HOME]=0;
       keys['7']=0;
     }
   }
 
-  if( keys[SDLK_PAGEUP] || keys['9'] ) {
+  if( keys[BO_PAGEUP] || keys['9'] ) {
     if( StartTranslate(6) ) {
-      keys[SDLK_PAGEUP]=0;
+      keys[BO_PAGEUP]=0;
       keys['9']=0;
     }
   }
 
-  if( keys[SDLK_END] || keys['1'] ) {
+  if( keys[BO_END] || keys['1'] ) {
     if( StartTranslate(7) ) {
-      keys[SDLK_END]=0;
+      keys[BO_END]=0;
       keys['1']=0;
     }
   }
 
-  if( keys[SDLK_PAGEDOWN] || keys['3'] ) {
+  if( keys[BO_PAGEDOWN] || keys['3'] ) {
     if( StartTranslate(8) ) {
-      keys[SDLK_PAGEDOWN]=0;
+      keys[BO_PAGEDOWN]=0;
       keys['3']=0;
     }
   }
 
-  if( keys[SDLK_SPACE] ) {
+  if( keys[BO_SPACE] ) {
     StartDrop();
-    keys[SDLK_SPACE]=0;
+    keys[BO_SPACE]=0;
   }
 
   if(keys[setupManager->GetKRz2()] || keys[tolower(setupManager->GetKRz2())]) {

@@ -55,7 +55,7 @@ int PageMainMenu::Process(BYTE *keys,float fTime) {
 
   ProcessDefault(keys,fTime);
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     switch(selItem) {
       case 0: // Start game
         mParent->ToPage(&mParent->startGamePage);
@@ -89,12 +89,12 @@ int PageMainMenu::Process(BYTE *keys,float fTime) {
         exitValue = 100;
         break;
     }
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     exitValue = 100;
-    keys[SDLK_ESCAPE] = 0;
+    keys[BO_ESCAPE] = 0;
   }
 
   return exitValue;

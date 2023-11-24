@@ -90,7 +90,7 @@ int PageHttp::Process(BYTE *keys,float fTime) {
 
     ProcessDefault(keys,fTime);
 
-    if( keys[SDLK_RETURN] ) {
+    if( keys[BO_RETURN] ) {
       switch(selItem) {
         case 0: // Edit Home
           strcpy(tmp,mParent->GetSetup()->GetHttpHome());
@@ -114,22 +114,22 @@ int PageHttp::Process(BYTE *keys,float fTime) {
           mParent->GetHttp()->SetProxy(!b);
           break;
       }
-      keys[SDLK_RETURN] = 0;
+      keys[BO_RETURN] = 0;
     }
 
-    if( keys[SDLK_ESCAPE] ) {
+    if( keys[BO_ESCAPE] ) {
        mParent->ToPage(&mParent->optionsPage);
-       keys[SDLK_ESCAPE] = 0;
+       keys[BO_ESCAPE] = 0;
     }
 
-    if( keys[SDLK_LEFT] || keys[SDLK_RIGHT] ) {
+    if( keys[BO_LEFT] || keys[BO_RIGHT] ) {
       if( selItem==2 ) {
         b = mParent->GetSetup()->GetUseProxy();
         mParent->GetSetup()->SetUseProxy(!b);
         mParent->GetHttp()->SetProxy(!b);
       }
-      keys[SDLK_LEFT] = 0;
-      keys[SDLK_RIGHT] = 0;
+      keys[BO_LEFT] = 0;
+      keys[BO_RIGHT] = 0;
     }
 
   } else {

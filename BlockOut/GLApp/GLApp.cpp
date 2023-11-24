@@ -31,21 +31,28 @@ int GLApplication::SetVideoMode() {
 
   // Enable/Disable vertical blanking 
   // Work only at application startup
-  SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL,m_bVSync);
+  SDL_GL_SetSwapInterval(m_bVSync);
 
   // Set the video mode
   Uint32 flags;
-  if( m_bWindowed ) flags = SDL_DOUBLEBUF | SDL_OPENGL;
-  else              flags = SDL_DOUBLEBUF | SDL_OPENGL | SDL_FULLSCREEN;
+  if( m_bWindowed ) flags = SDL_WINDOW_OPENGL;
+  else              flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
 
-  if( SDL_SetVideoMode( m_screenWidth, m_screenHeight, 0, flags ) == NULL )
+  m_screen = SDL_CreateWindow(m_strWindowTitle,
+                              SDL_WINDOWPOS_UNDEFINED,
+                              SDL_WINDOWPOS_UNDEFINED,
+                              m_screenWidth,
+                              m_screenHeight,
+                              flags);
+
+  if( m_screen == NULL )
   {
 #ifdef WINDOWS
     char message[256];
 	sprintf(message,"SDL_SetVideoMode() failed : %s\n",SDL_GetError());
 	MessageBox(NULL,message,"ERROR",MB_OK|MB_ICONERROR);
 #else
-    printf("SDL_SetVideoMode() failed : %s\n",SDL_GetError());
+    printf("SDL_CreateWindow() failed : %s\n",SDL_GetError());
 #endif
     return GL_FAIL;
   }
@@ -71,7 +78,7 @@ int GLApplication::ToggleFullscreen() {
 
   if( !SetVideoMode() ) return GL_FAIL;
 
-  SDL_Surface *vSurf = SDL_GetVideoSurface();
+  SDL_Surface *vSurf = SDL_GetWindowSurface(m_screen);
   m_bitsPerPixel = vSurf->format->BitsPerPixel;
 
   errCode = RestoreDeviceObjects();
@@ -114,16 +121,12 @@ int GLApplication::Create(int width, int height, BOOL bFullScreen, BOOL bVSync )
 	return GL_FAIL;    
   }
 
-  SDL_WM_SetCaption(m_strWindowTitle, NULL);
-
   //SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, 0);
-  SDL_EnableUNICODE( 1 );
-  SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
     
   //Create Window
   if( !SetVideoMode() ) return GL_FAIL;
 
-  SDL_Surface *vSurf = SDL_GetVideoSurface();
+  SDL_Surface *vSurf = SDL_GetWindowSurface(m_screen);
   m_bitsPerPixel = vSurf->format->BitsPerPixel;
 
   OneTimeSceneInit();
@@ -154,7 +157,7 @@ int GLApplication::Resize( DWORD width, DWORD height ) {
 
   if( !SetVideoMode() ) return GL_FAIL;
 
-  SDL_Surface *vSurf = SDL_GetVideoSurface();
+  SDL_Surface *vSurf = SDL_GetWindowSurface(m_screen);
   m_bitsPerPixel = vSurf->format->BitsPerPixel;
 
   errCode = RestoreDeviceObjects();
@@ -224,7 +227,7 @@ int GLApplication::Run() {
      if( glGetError() != GL_NO_ERROR ) { printGlError(); quit = true; }
 
      //Swap buffer
-     SDL_GL_SwapBuffers();
+     SDL_GL_SwapWindow(m_screen);
       
   }
   

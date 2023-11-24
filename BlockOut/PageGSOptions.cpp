@@ -86,7 +86,7 @@ int PageGSOptions::Process(BYTE *keys,float fTime) {
 
   ProcessDefault(keys,fTime);
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     switch( selItem ) {
       case 0: // Sound
       case 1: // FullScreen mode
@@ -97,25 +97,25 @@ int PageGSOptions::Process(BYTE *keys,float fTime) {
       case 6: // Sound preset
       case 7: // Frame limiter
       case 8: // Line width
-        exitValue = ProcessKey(SDLK_RIGHT);
+        exitValue = ProcessKey(BO_RIGHT);
         break;
     }
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_LEFT]  ) {
-    exitValue = ProcessKey(SDLK_LEFT);
-    keys[SDLK_LEFT] = 0;
+  if( keys[BO_LEFT]  ) {
+    exitValue = ProcessKey(BO_LEFT);
+    keys[BO_LEFT] = 0;
   }
 
-  if( keys[SDLK_RIGHT]  ) {
-    exitValue = ProcessKey(SDLK_RIGHT);
-    keys[SDLK_RIGHT] = 0;
+  if( keys[BO_RIGHT]  ) {
+    exitValue = ProcessKey(BO_RIGHT);
+    keys[BO_RIGHT] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
      mParent->ToPage(&mParent->mainMenuPage);
-     keys[SDLK_ESCAPE] = 0;
+     keys[BO_ESCAPE] = 0;
   }
 
   return exitValue;
@@ -128,7 +128,7 @@ int PageGSOptions::ProcessKey(int key) {
 
     switch( selItem ) {
       case 0: // Sound
-        if( key==SDLK_RIGHT || key==SDLK_LEFT ) {
+        if( key==BO_RIGHT || key==BO_LEFT ) {
           BOOL sound = mParent->GetSetup()->GetSound();
           mParent->GetSetup()->SetSound(!sound);
           mParent->GetSound()->SetEnable(!sound);
@@ -136,7 +136,7 @@ int PageGSOptions::ProcessKey(int key) {
         }
       break;
       case 1: // Fullscreen mode
-        if( key==SDLK_RIGHT || key==SDLK_LEFT ) {
+        if( key==BO_RIGHT || key==BO_LEFT ) {
           BOOL fs = mParent->GetSetup()->GetFullScreen();
           mParent->GetSetup()->SetFullScreen(!fs);
           exitValue = 3; // Update full screen
@@ -144,7 +144,7 @@ int PageGSOptions::ProcessKey(int key) {
       break;
       case 2: // Window size
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetWindowSize();
             if( x<RES_1600x1200 )
               mParent->GetSetup()->SetWindowSize(x+1);
@@ -152,7 +152,7 @@ int PageGSOptions::ProcessKey(int key) {
               mParent->GetSetup()->SetWindowSize(RES_640x480);
             exitValue = 2; // Resize
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetWindowSize();
             if( x>RES_640x480 )
               mParent->GetSetup()->SetWindowSize(x-1);
@@ -164,14 +164,14 @@ int PageGSOptions::ProcessKey(int key) {
       break;
       case 3: // Rotation speed
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetAnimationSpeed();
             if( x<ASPEED_FAST )
               mParent->GetSetup()->SetAnimationSpeed(x+1);
             else
               mParent->GetSetup()->SetAnimationSpeed(ASPEED_SLOW);
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetAnimationSpeed();
             if( x>ASPEED_SLOW )
               mParent->GetSetup()->SetAnimationSpeed(x-1);
@@ -182,14 +182,14 @@ int PageGSOptions::ProcessKey(int key) {
       break;
       case 4: // Transparent face
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetTransparentFace();
             if( x<FTRANS_MAX )
               mParent->GetSetup()->SetTransparentFace(x+1);
             else
               mParent->GetSetup()->SetTransparentFace(FTRANS_MIN);
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetTransparentFace();
             if( x>FTRANS_MIN )
               mParent->GetSetup()->SetTransparentFace(x-1);
@@ -200,14 +200,14 @@ int PageGSOptions::ProcessKey(int key) {
       break;
       case 5: // Game style
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetStyle();
             if( x<STYLE_ARCADE )
               mParent->GetSetup()->SetStyle(x+1);
             else
               mParent->GetSetup()->SetStyle(STYLE_CLASSIC);
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetStyle();
             if( x>STYLE_CLASSIC )
               mParent->GetSetup()->SetStyle(x-1);
@@ -218,14 +218,14 @@ int PageGSOptions::ProcessKey(int key) {
       break;
       case 6: // Sound preset
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetSoundType();
             if( x<SOUND_BLOCKOUT )
               mParent->GetSetup()->SetSoundType(x+1);
             else
               mParent->GetSetup()->SetSoundType(SOUND_BLOCKOUT2);
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetSoundType();
             if( x>SOUND_BLOCKOUT2 )
               mParent->GetSetup()->SetSoundType(x-1);
@@ -236,14 +236,14 @@ int PageGSOptions::ProcessKey(int key) {
       break;
       case 7: // Frame limiter
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetFrLimiter();
             if( x<FR_LIMITVSYNC )
               mParent->GetSetup()->SetFrLimiter(x+1);
             else
               mParent->GetSetup()->SetFrLimiter(FR_NOLIMIT);
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetFrLimiter();
             if( x>FR_NOLIMIT )
               mParent->GetSetup()->SetFrLimiter(x-1);
@@ -254,14 +254,14 @@ int PageGSOptions::ProcessKey(int key) {
       break;      
       case 8: // Line width
         switch( key ) {
-          case SDLK_RIGHT:
+          case BO_RIGHT:
             x = mParent->GetSetup()->GetLineWidth();
             if( x<LINEW_MAX )
               mParent->GetSetup()->SetLineWidth(x+1);
             else
               mParent->GetSetup()->SetLineWidth(LINEW_MIN);
             break;
-          case SDLK_LEFT:
+          case BO_LEFT:
             x = mParent->GetSetup()->GetLineWidth();
             if( x>LINEW_MIN )
               mParent->GetSetup()->SetLineWidth(x-1);

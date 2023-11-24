@@ -100,6 +100,7 @@ public:
 private:
 
    int SetVideoMode();
+   SDL_Window *m_screen;
 
    int m_bitsPerPixel;
    char errMsg[512];

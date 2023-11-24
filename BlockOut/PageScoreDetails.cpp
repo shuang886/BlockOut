@@ -78,18 +78,18 @@ int PageScoreDetails::Process(BYTE *keys,float fTime) {
 
   ProcessDefault(keys,fTime);
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     mParent->ToPage(&mParent->startGamePage);
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     if( rank & 0x100 ) {
       mParent->ToPage(&mParent->hallOfFamePageOnLine,1,NULL);
     } else {
       mParent->ToPage(&mParent->hallOfFamePage,rank,NULL);
     }
-    keys[SDLK_ESCAPE] = 0;
+    keys[BO_ESCAPE] = 0;
   }
 
   return 0;

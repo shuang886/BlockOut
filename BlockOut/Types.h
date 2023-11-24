@@ -193,6 +193,31 @@ typedef struct {
 
 } AI_MOVE;
 
+// "Note that both keycodes and scancodes are now 32 bits, and use a wide range
+//  of numbers. There's no SDLK_LAST anymore. If your program had a lookup
+//  table of SDLK_LAST elements, to map between SDL keys and whatever your
+//  application wanted internally, that's no longer feasible."
+//
+// - SDL2 Migration Guide
+enum KeyCodes {
+    BO_BACKSPACE    = 0x08,
+    BO_RETURN       = 0x0D,
+    BO_ESCAPE       = 0x1B,
+    BO_SPACE        = 0x20,
+    // ...leave space for all of ASCII...
+    BO_F1           = 0x80,
+    BO_UP,
+    BO_DOWN,
+    BO_LEFT,
+    BO_RIGHT,
+    BO_HOME,
+    BO_END,
+    BO_PAGEUP,
+    BO_PAGEDOWN,
+    BO_DELETE,
+    BO_LAST
+};
+
 //-----------------------------------------------------------------------------
 // Util functions
 //-----------------------------------------------------------------------------

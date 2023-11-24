@@ -16,6 +16,7 @@
 */
 
 #include "Menu.h"
+#include <OpenGL/glu.h>
 
 // -----------------------------------------------------------
 
@@ -153,9 +154,9 @@ void PageControls::ProcessAnimation(float fTime) {
 
 void PageControls::ProcessEdit(BYTE *keys) {
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     editMode = false;
-    keys[SDLK_ESCAPE] = 0;
+    keys[BO_ESCAPE] = 0;
   }
 
   // Search key
@@ -199,10 +200,10 @@ void PageControls::ProcessEdit(BYTE *keys) {
 void PageControls::ProcessMenuDis(BYTE *keys) {
 
   int dir = 0;
-  if( (dir==0) && keys[SDLK_LEFT] ) dir = 1;
-  if( (dir==0) && keys[SDLK_RIGHT]) dir = 2;
-  if( (dir==0) && keys[SDLK_UP]   ) dir = 3;
-  if( (dir==0) && keys[SDLK_DOWN] ) dir = 4;
+  if( (dir==0) && keys[BO_LEFT] ) dir = 1;
+  if( (dir==0) && keys[BO_RIGHT]) dir = 2;
+  if( (dir==0) && keys[BO_UP]   ) dir = 3;
+  if( (dir==0) && keys[BO_DOWN] ) dir = 4;
 
   // Menu displacement
   switch(selItem) {
@@ -315,12 +316,12 @@ int PageControls::Process(BYTE *keys,float fTime) {
     ProcessEdit(keys);
 
   // Reset cursor key
-  keys[SDLK_LEFT] = 0;
-  keys[SDLK_RIGHT] = 0;
-  keys[SDLK_UP] = 0;
-  keys[SDLK_DOWN] = 0;
+  keys[BO_LEFT] = 0;
+  keys[BO_RIGHT] = 0;
+  keys[BO_UP] = 0;
+  keys[BO_DOWN] = 0;
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     switch(selItem) {
       case 0: // Reset to Qwerty
         mParent->GetSetup()->ResetToQwerty();
@@ -340,12 +341,12 @@ int PageControls::Process(BYTE *keys,float fTime) {
         startEditTime = fTime;
         break;
     }
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     mParent->ToPage(&mParent->optionsPage);
-    keys[SDLK_ESCAPE] = 0;
+    keys[BO_ESCAPE] = 0;
   }
 
   // rotation mode

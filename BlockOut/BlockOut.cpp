@@ -19,6 +19,7 @@
 
 #ifndef WINDOWS
 #include <unistd.h>
+#include <OpenGL/glu.h>
 #else
 extern void InitialiseWinsock();
 #endif
@@ -111,11 +112,11 @@ int BlockOut::FrameMove()
 
   // General keys
 
-  if( m_bKey[SDLK_F1] ) {
+  if( m_bKey[BO_F1] ) {
     BOOL fs = theSetup.GetFullScreen();
     theSetup.SetFullScreen(!fs);
     UpdateFullScreen();
-    m_bKey[SDLK_F1]=0;
+    m_bKey[BO_F1]=0;
   }
 
   // Processing
@@ -368,11 +369,22 @@ int BlockOut::EventProc(SDL_Event *event)
   // Handle key presses
   if( event->type == SDL_KEYDOWN )
   {
-    int unicode = (event->key.keysym.unicode & 0x7F);
+    int unicode = (event->key.keysym.sym & 0x7F);
     if( unicode ) {
       m_bKey[unicode] = 1;
     } else {
-      m_bKey[event->key.keysym.sym] = 1;
+      switch (event->key.keysym.sym) {
+        case SDLK_F1:       m_bKey[BO_F1] = 1; break;
+        case SDLK_UP:       m_bKey[BO_UP] = 1; break;
+        case SDLK_DOWN:     m_bKey[BO_DOWN] = 1; break;
+        case SDLK_LEFT:     m_bKey[BO_LEFT] = 1; break;
+        case SDLK_RIGHT:    m_bKey[BO_RIGHT] = 1; break;
+        case SDLK_HOME:     m_bKey[BO_HOME] = 1; break;
+        case SDLK_END:      m_bKey[BO_END] = 1; break;
+        case SDLK_PAGEUP:   m_bKey[BO_PAGEUP] = 1; break;
+        case SDLK_PAGEDOWN: m_bKey[BO_PAGEDOWN] = 1; break;
+        case SDLK_DELETE:   m_bKey[BO_DELETE] = 1; break;
+      }
     }
   }
 

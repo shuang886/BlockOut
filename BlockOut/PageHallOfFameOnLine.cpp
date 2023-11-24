@@ -219,26 +219,26 @@ void PageHallOfFameOnLine::Render() {
 
 int PageHallOfFameOnLine::Process(BYTE *keys,float fTime) {
 
-  if( keys[SDLK_UP] ) {
+  if( keys[BO_UP] ) {
     if( selItem>0 ) selItem--;
-    keys[SDLK_UP]=0;
+    keys[BO_UP]=0;
   }
 
-  if( keys[SDLK_DOWN] ) {
+  if( keys[BO_DOWN] ) {
     if( selItem<98 ) selItem++;
-    keys[SDLK_DOWN]=0;
+    keys[BO_DOWN]=0;
   }
 
-  if( keys[SDLK_PAGEUP] ) {
+  if( keys[BO_PAGEUP] ) {
     if( selItem>10 ) selItem-=10;
     else             selItem=0;
-    keys[SDLK_PAGEUP]=0;
+    keys[BO_PAGEUP]=0;
   }
 
-  if( keys[SDLK_PAGEDOWN] ) {
+  if( keys[BO_PAGEDOWN] ) {
     if( selItem<88 ) selItem+=10;
     else             selItem=98;
-    keys[SDLK_PAGEDOWN]=0;
+    keys[BO_PAGEDOWN]=0;
   }
 
   // Scroll to visible
@@ -251,14 +251,14 @@ int PageHallOfFameOnLine::Process(BYTE *keys,float fTime) {
   }
 
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     mParent->ToPage(&mParent->scoreDetailsPage,selItem + 0x100,allScore + selItem);
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
      mParent->ToPage(&mParent->mainMenuPage);
-     keys[SDLK_ESCAPE] = 0;
+     keys[BO_ESCAPE] = 0;
   }
 
   return 0;

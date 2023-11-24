@@ -22,6 +22,7 @@
 #include "GLApp/GLSprite.h"
 #include "GLApp/GLMatrix.h"
 #include "PolyCube.h"
+#include "Types.h"
 
 class Menu;
 
@@ -53,16 +54,16 @@ public:
 
    void ProcessDefault(BYTE *keys,float fTime) {
 
-    if(keys[SDLK_DOWN]) {
+    if(keys[BO_DOWN]) {
       selItem++;
       if(selItem>=nbItem) selItem=0;
-      keys[SDLK_DOWN] = 0;
+      keys[BO_DOWN] = 0;
     }
      
-    if(keys[SDLK_UP]) {
+    if(keys[BO_UP]) {
       selItem--;
       if(selItem<0) selItem=nbItem-1;
-      keys[SDLK_UP] = 0;
+      keys[BO_UP] = 0;
     }
 
   }

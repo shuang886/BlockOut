@@ -16,6 +16,8 @@
 */
 
 #include "Menu.h"
+#include <OpenGL/glu.h>
+
 // -----------------------------------------------------------
 
 void PageCredits::Prepare(int iParam,void *pParam) {
@@ -46,10 +48,10 @@ void PageCredits::Render() {
 
 int PageCredits::Process(BYTE *keys,float fTime) {
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     mParent->GetSound()->StopMusic();
     mParent->ToPage(&mParent->mainMenuPage);
-    keys[SDLK_ESCAPE] = 0;
+    keys[BO_ESCAPE] = 0;
   }
 
   if(startTime==0.0f)

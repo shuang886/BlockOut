@@ -86,14 +86,14 @@ int PageHallOfFame::Process(BYTE *keys,float fTime) {
 
     ProcessDefault(keys,fTime);
 
-    if( keys[SDLK_RETURN] ) {
+    if( keys[BO_RETURN] ) {
       mParent->ToPage(&mParent->scoreDetailsPage,selItem,allScore + selItem);
-      keys[SDLK_RETURN] = 0;
+      keys[BO_RETURN] = 0;
     }
 
-    if( keys[SDLK_ESCAPE] ) {
+    if( keys[BO_ESCAPE] ) {
        mParent->ToPage(&mParent->mainMenuPage);
-       keys[SDLK_ESCAPE] = 0;
+       keys[BO_ESCAPE] = 0;
     }
 
   } else {
@@ -120,22 +120,22 @@ void PageHallOfFame::ProcessEdit(BYTE *keys,float fTime) {
   }
   
   // Delete
-  if( keys[SDLK_DELETE] || keys[SDLK_LEFT] || keys[SDLK_BACKSPACE] ) {
+  if( keys[BO_DELETE] || keys[BO_LEFT] || keys[BO_BACKSPACE] ) {
     if( editPos>0 ) editPos--;
     if( editPos<10 ) editText[editPos]=' ';
-    keys[SDLK_DELETE] = 0;
-    keys[SDLK_LEFT] = 0;
-    keys[SDLK_BACKSPACE] = 0;
+    keys[BO_DELETE] = 0;
+    keys[BO_LEFT] = 0;
+    keys[BO_BACKSPACE] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] || keys[SDLK_RETURN] ) {
+  if( keys[BO_ESCAPE] || keys[BO_RETURN] ) {
     // Record new name and save
     strcpy(editScore->name,editText);
     mParent->GetSetup()->SaveHighScore();
     mParent->GetSetup()->GetHighScore(allScore);
     editMode = FALSE;
-    keys[SDLK_ESCAPE] = 0;
-    keys[SDLK_RETURN] = 0;
+    keys[BO_ESCAPE] = 0;
+    keys[BO_RETURN] = 0;
   }
 
 }

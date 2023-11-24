@@ -47,34 +47,34 @@ int PageChangeSetup::Process(BYTE *keys,float fTime) {
 
   ProcessDefault(keys,fTime);
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     switch( selItem ) {
       case 0:  // Pit width
       case 1:  // Pit height
       case 2:  // Pit Depth
       case 3:  // Block set
-        ProcessKey(SDLK_RIGHT);
+        ProcessKey(BO_RIGHT);
         break;
       case 4:  // Start game
         mParent->ToPage(&mParent->startGamePage);
         break;
     }
-    keys[SDLK_RETURN] = 0;
+    keys[BO_RETURN] = 0;
   }
 
-  if( keys[SDLK_LEFT]  ) {
-    ProcessKey(SDLK_LEFT);
-    keys[SDLK_LEFT] = 0;
+  if( keys[BO_LEFT]  ) {
+    ProcessKey(BO_LEFT);
+    keys[BO_LEFT] = 0;
   }
 
-  if( keys[SDLK_RIGHT]  ) {
-    ProcessKey(SDLK_RIGHT);
-    keys[SDLK_RIGHT] = 0;
+  if( keys[BO_RIGHT]  ) {
+    ProcessKey(BO_RIGHT);
+    keys[BO_RIGHT] = 0;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
      mParent->ToPage(&mParent->mainMenuPage);
-     keys[SDLK_ESCAPE] = 0;
+     keys[BO_ESCAPE] = 0;
   }
 
   return 0;
@@ -88,7 +88,7 @@ void PageChangeSetup::ProcessKey(int keyCode) {
   switch(keyCode) {
 
     // LEFT ----------------------------------------
-    case SDLK_LEFT:
+    case BO_LEFT:
 
       switch( selItem ) {
 
@@ -124,7 +124,7 @@ void PageChangeSetup::ProcessKey(int keyCode) {
       break;
 
     // RIGHT ----------------------------------------
-    case SDLK_RIGHT:
+    case BO_RIGHT:
 
       switch( selItem ) {
         case 0: // Pit width

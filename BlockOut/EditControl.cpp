@@ -45,7 +45,7 @@ void EditControl::SetMode(char *text,BOOL edit,BYTE *keys) {
   editMode = edit;
   startPos = 0;
   editPos = 0;
-  if(keys) ZeroMemory( keys, SDLK_LAST * sizeof(BYTE) );
+  if(keys) ZeroMemory( keys, BO_LAST * sizeof(BYTE) );
 
 }
 
@@ -75,37 +75,37 @@ int EditControl::Process(BYTE *keys,float fTime) {
   }
 
   // Back space
-  if( keys[SDLK_BACKSPACE] ) {
+  if( keys[BO_BACKSPACE] ) {
     if( editPos>0 ) {
       editPos--;
       DeleteChar(editPos);
       lgth--;
     }
-    keys[SDLK_BACKSPACE] = 0;
+    keys[BO_BACKSPACE] = 0;
   }
 
   // Delete
-  if( keys[SDLK_DELETE] ) {
+  if( keys[BO_DELETE] ) {
     if( editPos<lgth-1 ) {
       DeleteChar(editPos);
       lgth--;
     }
-    keys[SDLK_DELETE] = 0;
+    keys[BO_DELETE] = 0;
   }
 
   // Arrow keys
-  if( keys[SDLK_LEFT] ) {
+  if( keys[BO_LEFT] ) {
     if( editPos>0 ) {
       editPos--;
     }
-    keys[SDLK_LEFT] = 0;
+    keys[BO_LEFT] = 0;
   }
 
-  if( keys[SDLK_RIGHT] ) {
+  if( keys[BO_RIGHT] ) {
     if( editPos<(lgth-1) ) {
       editPos++;
     }
-    keys[SDLK_RIGHT] = 0;
+    keys[BO_RIGHT] = 0;
   }
 
   // Scroll to visible
@@ -117,21 +117,21 @@ int EditControl::Process(BYTE *keys,float fTime) {
     startPos++;
   }
 
-  if( keys[SDLK_ESCAPE] ) {
+  if( keys[BO_ESCAPE] ) {
     // Cancelling
     editMode = FALSE;
     retValue = 2;
-    ZeroMemory( keys, SDLK_LAST * sizeof(BYTE) );
-    keys[SDLK_ESCAPE] = 0;
+    ZeroMemory( keys, BO_LAST * sizeof(BYTE) );
+    keys[BO_ESCAPE] = 0;
   }
 
-  if( keys[SDLK_RETURN] ) {
+  if( keys[BO_RETURN] ) {
     int x = 0;
     editText[lgth-1]=0; // Remove last ' '
     retValue = 1;
     editMode = FALSE;
-    ZeroMemory( keys, SDLK_LAST * sizeof(BYTE) );
-    keys[SDLK_RETURN] = 0;
+    ZeroMemory( keys, BO_LAST * sizeof(BYTE) );
+    keys[BO_RETURN] = 0;
   }
 
   return retValue;

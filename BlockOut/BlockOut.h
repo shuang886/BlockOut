@@ -31,7 +31,7 @@ class BlockOut : public GLApplication
 	char extendedTitle[256];
 
     // Navigation
-    BYTE m_bKey[SDLK_LAST];
+    BYTE m_bKey[BO_LAST];
 
     // Global mode
     BOOL inited;

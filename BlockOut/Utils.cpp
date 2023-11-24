@@ -379,7 +379,7 @@ extern char GetChar(BYTE *keys) {
     if( keys[i+'0'] ) retChar = (char)i+'0';
 
   // Space
-  if( keys[SDLK_SPACE] ) {
+  if( keys[BO_SPACE] ) {
     retChar = ' ';
   }
 
@@ -447,7 +447,7 @@ extern char GetChar(BYTE *keys) {
   for(BYTE i=0;i<=9;i++)
     keys[i+'0']=0;
 
-  keys[SDLK_SPACE]=0;
+  keys[BO_SPACE]=0;
   keys['.']=0;
   keys['/']=0;
   keys['-']=0;
