@@ -22,6 +22,8 @@ GLApplication::GLApplication() {
   strcpy((char *)m_strFrameStats,"");
   m_screenWidth = 640;
   m_screenHeight = 480;
+  m_screen = NULL;
+  m_glContext = NULL;
 
 }
 
@@ -32,6 +34,18 @@ int GLApplication::SetVideoMode() {
   // Enable/Disable vertical blanking 
   // Work only at application startup
   SDL_GL_SetSwapInterval(m_bVSync);
+
+  // Clean up prior window and GL context, if any
+  if ( m_glContext != NULL )
+  {
+    SDL_GL_DeleteContext(m_glContext);
+    m_glContext = NULL;
+  }
+  if ( m_screen != NULL )
+  {
+    SDL_DestroyWindow(m_screen);
+    m_screen = NULL;
+  }
 
   // Set the video mode
   Uint32 flags;
@@ -57,7 +71,8 @@ int GLApplication::SetVideoMode() {
     return GL_FAIL;
   }
   
-  if ( SDL_GL_CreateContext(m_screen) == NULL )
+  m_glContext = SDL_GL_CreateContext(m_screen);
+  if ( m_glContext == NULL )
   {
     printf("SDL_GL_CreateContext() failed : %s\n",SDL_GetError());
     return GL_FAIL;
