@@ -56,6 +56,12 @@ int GLApplication::SetVideoMode() {
 #endif
     return GL_FAIL;
   }
+  
+  if ( SDL_GL_CreateContext(m_screen) == NULL )
+  {
+    printf("SDL_GL_CreateContext() failed : %s\n",SDL_GetError());
+    return GL_FAIL;
+  }
 
   if( !m_bWindowed )
     SDL_ShowCursor(SDL_DISABLE); 
@@ -78,12 +84,9 @@ int GLApplication::ToggleFullscreen() {
 
   if( !SetVideoMode() ) return GL_FAIL;
 
-  SDL_Surface *vSurf = SDL_GetWindowSurface(m_screen);
-  m_bitsPerPixel = vSurf->format->BitsPerPixel;
-
   errCode = RestoreDeviceObjects();
   if( !errCode ) {
-    printGlError();
+    printGlError(errCode);
     exit(1);
   }
 
@@ -126,13 +129,10 @@ int GLApplication::Create(int width, int height, BOOL bFullScreen, BOOL bVSync )
   //Create Window
   if( !SetVideoMode() ) return GL_FAIL;
 
-  SDL_Surface *vSurf = SDL_GetWindowSurface(m_screen);
-  m_bitsPerPixel = vSurf->format->BitsPerPixel;
-
   OneTimeSceneInit();
   errCode = RestoreDeviceObjects();
   if( !errCode ) {
-    printGlError();
+    printGlError(errCode);
     exit(0);
   }
 
@@ -157,12 +157,9 @@ int GLApplication::Resize( DWORD width, DWORD height ) {
 
   if( !SetVideoMode() ) return GL_FAIL;
 
-  SDL_Surface *vSurf = SDL_GetWindowSurface(m_screen);
-  m_bitsPerPixel = vSurf->format->BitsPerPixel;
-
   errCode = RestoreDeviceObjects();
   if( !errCode ) {
-    printGlError();
+    printGlError(errCode);
     exit(1);
   }
 
@@ -183,6 +180,7 @@ int GLApplication::Run() {
   int  errCode;
   int  fTick;
   int  firstTick;
+  GLenum glError;
 
   m_fTime        = 0.0f;
   m_fElapsedTime = 0.0f;
@@ -211,7 +209,7 @@ int GLApplication::Run() {
         m_fFPS = (float)(nbFrame*1000) / (float)t;
         nbFrame = 0;
         lastTick = t0;
-        sprintf(m_strFrameStats,"%.2f fps (%dx%dx%d)",m_fFPS,m_screenWidth,m_screenHeight,m_bitsPerPixel);
+        sprintf(m_strFrameStats,"%.2f fps (%dx%d)",m_fFPS,m_screenWidth,m_screenHeight);
      }
 
      m_fTime = (float) ( fTick - firstTick ) / 1000.0f;
@@ -220,11 +218,13 @@ int GLApplication::Run() {
 
      if(!quit) errCode = FrameMove();
      if( !errCode ) quit = true;
-     if( glGetError() != GL_NO_ERROR ) { printGlError(); quit = true; }
+     glError = glGetError();
+     if( glError != GL_NO_ERROR ) { printGlError(glError); quit = true; }
 
      if(!quit) errCode = Render();
      if( !errCode ) quit = true;
-     if( glGetError() != GL_NO_ERROR ) { printGlError(); quit = true; }
+     glError = glGetError();
+     if( glError != GL_NO_ERROR ) { printGlError(glError); quit = true; }
 
      //Swap buffer
      SDL_GL_SwapWindow(m_screen);
@@ -257,11 +257,10 @@ void GLApplication::SetMaterial(GLMATERIAL *mat) {
 
 // -------------------------------------------
 
-void GLApplication::printGlError() {
+void GLApplication::printGlError(GLenum errCode) {
   
   char message[256];
 
-  GLenum errCode = glGetError();
   switch( errCode ) {
     case GL_INVALID_ENUM:
       sprintf(message,"OpenGL failure: An unacceptable value is specified for an enumerated argument. The offending function is ignored, having no side effect other than to set the error flag.");
@@ -282,7 +281,7 @@ void GLApplication::printGlError() {
       sprintf(message, "OpenGL failure: There is not enough memory left to execute the function. The state of OpenGL is undefined, except for the state of the error flags, after this error is recorded.");
       break;
 	default:
-      sprintf(message, "Application failure.");
+      sprintf(message, "Application failure, error=%#x\n", errCode);
 	  break;
   }
 

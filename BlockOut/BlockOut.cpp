@@ -278,6 +278,7 @@ int BlockOut::OneTimeSceneInit()
 int BlockOut::RestoreDeviceObjects()
 {
     GLfloat matView[16];
+    GLenum glError;
 
     m_pSmallFont.RestoreDeviceObjects(m_screenWidth,m_screenHeight);
 
@@ -318,8 +319,10 @@ int BlockOut::RestoreDeviceObjects()
     glDisable(GL_DEPTH_TEST);
 
     //If there was any errors
-    if( glGetError() != GL_NO_ERROR )
+    glError = glGetError();
+    if( glError != GL_NO_ERROR )
     {
+        fprintf(stderr, "OpenGL error: %#x\n", glError);
         return GL_FAIL;    
     }
     

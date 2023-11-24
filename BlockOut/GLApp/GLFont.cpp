@@ -56,7 +56,7 @@ int GLFont2D::RestoreDeviceObjects(int scrWidth,int scrHeight) {
   glTexImage2D (
     GL_TEXTURE_2D,       // Type
     0,                   // No Mipmap
-    4,                   // Format RGBA
+    GL_RGBA,             // Format RGBA
     fWidth,              // Width
     fHeight,             // Height
     0,                   // Border
@@ -68,14 +68,15 @@ int GLFont2D::RestoreDeviceObjects(int scrWidth,int scrHeight) {
   free(buff32);
   img.Release();
 
-  if( glGetError() != GL_NO_ERROR )
+  GLenum error = glGetError();
+  if( error != GL_NO_ERROR )
   {
 #ifdef WINDOWS
     char message[256];
-	sprintf(message,"GLFont2D::RestoreDeviceObjects(): Failed to create font texture: glcode=%d\n",glGetError());
+	sprintf(message,"GLFont2D::RestoreDeviceObjects(): Failed to create font texture: glcode=%#x\n",error);
 	MessageBox(NULL,message,"ERROR",MB_OK|MB_ICONERROR);
 #else
-    printf("GLFont2D::RestoreDeviceObjects(): Failed to create font texture: glcode=%d\n",glGetError());
+    printf("GLFont2D::RestoreDeviceObjects(): Failed to create font texture: glcode=%#x\n",error);
 #endif
     return 0;    
   }
