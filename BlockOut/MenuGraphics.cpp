@@ -96,14 +96,14 @@ void Menu::FullRepaint() {
 
 // ---------------------------------------------------------------------
 
-int Menu::Create(int width,int height) {
+int Menu::Create(int width,int height,int xOffset,int yOffset) {
 
   scrWidth = width;
   scrHeight = height;
 
   // Menu viewport
-  menuView.x      = 0;
-  menuView.y      = 0;
+  menuView.x      = xOffset;
+  menuView.y      = yOffset;
   menuView.width  = width;
   menuView.height = height;
 
@@ -155,11 +155,11 @@ int Menu::Create(int width,int height) {
   onlineLogo.UpdateSprite(x1,y1,x2,y2,0.0f,0.0f,1.0f,1.0f);
 
   // Controls menu page
-  if( !controlsPage.Create(width,height) )
+  if( !controlsPage.Create(width,height,xOffset,yOffset) )
     return GL_FAIL;
 
   // Credits page
-  if( !creditsPage.Create(width,height) )
+  if( !creditsPage.Create(width,height,xOffset,yOffset) )
     return GL_FAIL;
 
   FullRepaint();

@@ -390,7 +390,7 @@ void PageControls::Place(PolyCube *obj,GLfloat *mat,GLMatrix *matR,float x,float
 
 // -----------------------------------------------------------
 
-int PageControls::Create(int width,int height) {
+int PageControls::Create(int width,int height,int xOffset,int yOffset) {
 
   // Create pit background
   float pitX = (float)width  * 0.2187f;
@@ -435,8 +435,8 @@ int PageControls::Create(int width,int height) {
     vH = height - vY;
   }
 
-  blockView.x      = fround(pitX);
-  blockView.y      = height - (vY + vH);
+  blockView.x      = fround(pitX) + xOffset;
+  blockView.y      = height - (vY + vH) + yOffset;
   blockView.width  = fround(pitW);
   blockView.height = vH;
 

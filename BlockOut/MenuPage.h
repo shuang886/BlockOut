@@ -135,7 +135,7 @@ DECLARE(PageControls,
     void Place(PolyCube *obj,GLfloat *mat,GLMatrix *matR,float x,float y,float z);
     void RenderKey(int x,int y,char k,int pos);
   public:
-    int Create(int width,int height);
+    int Create(int width,int height,int xOffset,int yOffset);
     void InvalidateDeviceObjects();
 );
 
@@ -167,7 +167,7 @@ DECLARE(PageCredits,
    PolyCube     block;
    float        startTime;
   public:
-   int Create(int width,int height);
+   int Create(int width,int height,int xOffset,int yOffset);
    void InvalidateDeviceObjects();
 );
 

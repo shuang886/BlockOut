@@ -78,7 +78,7 @@ int PageCredits::Process(BYTE *keys,float fTime) {
 
 // -----------------------------------------------------------
 
-int PageCredits::Create(int width,int height) {
+int PageCredits::Create(int width,int height,int xOffset,int yOffset) {
 
   VERTEX org = v(-0.15f,-0.05f,0.4f);
 
@@ -95,8 +95,8 @@ int PageCredits::Create(int width,int height) {
   float W = (float)width  * 0.572f;
   float H = (float)height * 0.572f;
   
-  blockView.x      = fround(X);
-  blockView.y      = height - (fround(Y+H));
+  blockView.x      = fround(X) + xOffset;
+  blockView.y      = height - (fround(Y+H)) + yOffset;
   blockView.width  = fround(W);
   blockView.height = fround(H);
 

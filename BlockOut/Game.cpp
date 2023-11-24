@@ -114,7 +114,7 @@ void Game::SetSoundManager(SoundManager *manager) {
 
 // ---------------------------------------------------------------------
 
-int Game::Create(int width,int height) {
+int Game::Create(int width,int height,int xOffset,int yOffset) {
 
     // --------------------------------------------------------------
 
@@ -130,15 +130,15 @@ int Game::Create(int width,int height) {
     // --------------------------------------------------------------
 
     // Compute pit viewport
-    pitView.x      = fround( (float)width  * 0.0889f );
+    pitView.x      = fround( (float)width  * 0.0889f ) + xOffset;
     pitView.y      = fround( (float)height * 0.0183f );
     pitView.width  = fround( (float)width  * 0.7197f );
     pitView.height = fround( (float)height * 0.9596f );
-    pitView.y = height - (pitView.height + pitView.y);
+    pitView.y = height - (pitView.height + pitView.y) + yOffset;
 
     // Sprite viewport
-    spriteView.x = 0;
-    spriteView.y = 0;
+    spriteView.x = xOffset;
+    spriteView.y = yOffset;
     spriteView.width = width;
     spriteView.height = height;
 
@@ -321,7 +321,7 @@ void Game::InvalidateDeviceObjects() {
 
 // ---------------------------------------------------------------------
 
-void Game::StartGame(int width,int height,float fTime) {
+void Game::StartGame(int width,int height,int xOffset,int yOffset,float fTime) {
 
     // Recreate device objects if pit dimensions have changed
     if( setupManager->GetPitWidth()!=thePit.GetWidth()   ||
@@ -340,7 +340,7 @@ void Game::StartGame(int width,int height,float fTime) {
 
       InvalidateDeviceObjects();
 
-	  if( !Create(width,height) ) {
+	  if( !Create(width,height,xOffset,yOffset) ) {
 
 #ifdef WINDOWS
     	MessageBox(NULL,"Game::Create() failed, exiting.","Error",MB_OK|MB_ICONERROR);
@@ -400,9 +400,9 @@ void Game::StartGame(int width,int height,float fTime) {
 
 // ---------------------------------------------------------------------
 
-void Game::StartDemo(int width,int height,float fTime) {
+void Game::StartDemo(int width,int height,int xOffset,int yOffset,float fTime) {
 
-  StartGame(width,height,fTime);
+  StartGame(width,height,xOffset,yOffset,fTime);
   botPlayer.Init(thePit.GetWidth(),thePit.GetHeight(),thePit.GetDepth(),setupManager->GetBlockSet());
   botPlayer.GetMoves(&thePit,&(allPolyCube[pIdx]),xPos,yPos,zPos,AIMoves,&nbAIMove);
   gameMode = GAME_DEMO;
@@ -412,9 +412,9 @@ void Game::StartDemo(int width,int height,float fTime) {
 
 // ---------------------------------------------------------------------
 
-void Game::StartPractice(int width,int height,float fTime) {
+void Game::StartPractice(int width,int height,int xOffset,int yOffset,float fTime) {
 
-  StartGame(width,height,fTime);
+  StartGame(width,height,xOffset,yOffset,fTime);
   practiceFlag = TRUE;
   // Initialiase the bot player for the Help mode
   startShowAI = 0.0f;

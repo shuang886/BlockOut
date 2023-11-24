@@ -35,7 +35,7 @@ class Game {
     void SetSoundManager(SoundManager *manager);
 
     // Initialise device objects
-    int Create(int width,int height);
+    int Create(int width,int height,int xOffset,int yOffset);
 
     // Render the Game
     void Render();
@@ -44,13 +44,13 @@ class Game {
     void InvalidateDeviceObjects();
 
     // Start a game
-    void StartGame(int width,int height,float fTime);
+    void StartGame(int width,int height,int xOffset,int yOffset,float fTime);
 
     // Start a practice
-    void StartPractice(int width,int height,float fTime);
+    void StartPractice(int width,int height,int xOffset,int yOffset,float fTime);
 
     // Start a demo
-    void StartDemo(int width,int height,float fTime);
+    void StartDemo(int width,int height,int xOffset,int yOffset,float fTime);
 
     // Process game
     int Process(BYTE *keys,float fTime);

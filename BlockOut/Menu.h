@@ -32,7 +32,7 @@ class Menu {
     ~Menu();
 
     // Initialise device objects
-    int Create(int width,int height);
+    int Create(int width,int height,int xOffset,int yOffset);
 
     // Set/Grt view matrix
     void SetViewMatrix(GLfloat *mView);

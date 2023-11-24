@@ -97,10 +97,12 @@ public:
     // Internal constructor
     GLApplication();
 
+protected:
+    SDL_Window *m_screen;
+
 private:
 
    int SetVideoMode();
-   SDL_Window *m_screen;
    SDL_GLContext m_glContext;
 
    char errMsg[512];

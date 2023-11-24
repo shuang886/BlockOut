@@ -50,7 +50,7 @@ int GLApplication::SetVideoMode() {
   // Set the video mode
   Uint32 flags;
   if( m_bWindowed ) flags = SDL_WINDOW_OPENGL;
-  else              flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN;
+  else              flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP;
 
   m_screen = SDL_CreateWindow(m_strWindowTitle,
                               SDL_WINDOWPOS_UNDEFINED,

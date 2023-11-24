@@ -119,6 +119,11 @@ int BlockOut::FrameMove()
     m_bKey[BO_F1]=0;
   }
 
+  int availWidth, availHeight;
+  SDL_GetWindowSize(m_screen, &availWidth, &availHeight);
+  int xOffset = (availWidth - m_screenWidth) / 2;
+  int yOffset = (availHeight - m_screenHeight) / 2;
+
   // Processing
   int retValue;
   switch(mode) {
@@ -127,7 +132,7 @@ int BlockOut::FrameMove()
       switch( retValue ) {
         case 1: // Switch to game mode
           ZeroMemory( m_bKey, sizeof(m_bKey) );
-          theGame.StartGame(m_screenWidth,m_screenHeight,m_fTime);
+          theGame.StartGame(m_screenWidth,m_screenHeight,xOffset,yOffset,m_fTime);
           mode = GAME_MODE;
           break;
         case 2: // Resize
@@ -137,11 +142,11 @@ int BlockOut::FrameMove()
           UpdateFullScreen();
           break;
         case 7:
-          theGame.StartDemo(m_screenWidth,m_screenHeight,m_fTime);
+          theGame.StartDemo(m_screenWidth,m_screenHeight,xOffset,yOffset,m_fTime);
           mode = GAME_MODE;
           break;
         case 8:
-          theGame.StartPractice(m_screenWidth,m_screenHeight,m_fTime);
+          theGame.StartPractice(m_screenWidth,m_screenHeight,xOffset,yOffset,m_fTime);
           mode = GAME_MODE;
           break;
         case 100: // Exit
@@ -280,6 +285,11 @@ int BlockOut::RestoreDeviceObjects()
     GLfloat matView[16];
     GLenum glError;
 
+    int availWidth, availHeight;
+    SDL_GetWindowSize(m_screen, &availWidth, &availHeight);
+    int xOffset = (availWidth - m_screenWidth) / 2;
+    int yOffset = (availHeight - m_screenHeight) / 2;
+
     m_pSmallFont.RestoreDeviceObjects(m_screenWidth,m_screenHeight);
 
     //Set clear color
@@ -327,10 +337,10 @@ int BlockOut::RestoreDeviceObjects()
     }
     
     // Set up device objects
-    if( !theMenu.Create(m_screenWidth,m_screenHeight) )
+    if( !theMenu.Create(m_screenWidth,m_screenHeight,xOffset,yOffset) )
       return GL_FAIL;
 
-    if( !theGame.Create(m_screenWidth,m_screenHeight) )
+    if( !theGame.Create(m_screenWidth,m_screenHeight,xOffset,yOffset) )
       return GL_FAIL;
   
     theGame.SetViewMatrix(matView);
