@@ -121,8 +121,21 @@ int BlockOut::FrameMove()
 
   int availWidth, availHeight;
   SDL_GetWindowSize(m_screen, &availWidth, &availHeight);
-  int xOffset = (availWidth - m_screenWidth) / 2;
-  int yOffset = (availHeight - m_screenHeight) / 2;
+  
+  int width, height;
+  double xRatio = (double)availWidth / (double)m_screenWidth;
+  double yRatio = (double)availHeight / (double)m_screenHeight;
+  if ( xRatio < yRatio )
+  {
+    width = availWidth;
+    height = m_screenHeight * xRatio;
+  } else {
+    width = m_screenWidth * yRatio;
+    height = availHeight;
+  }
+  
+  int xOffset = (availWidth - width) / 2;
+  int yOffset = (availHeight - height) / 2;
 
   // Processing
   int retValue;
@@ -132,7 +145,7 @@ int BlockOut::FrameMove()
       switch( retValue ) {
         case 1: // Switch to game mode
           ZeroMemory( m_bKey, sizeof(m_bKey) );
-          theGame.StartGame(m_screenWidth,m_screenHeight,xOffset,yOffset,m_fTime);
+          theGame.StartGame(width,height,xOffset,yOffset,m_fTime);
           mode = GAME_MODE;
           break;
         case 2: // Resize
@@ -142,11 +155,11 @@ int BlockOut::FrameMove()
           UpdateFullScreen();
           break;
         case 7:
-          theGame.StartDemo(m_screenWidth,m_screenHeight,xOffset,yOffset,m_fTime);
+          theGame.StartDemo(width,height,xOffset,yOffset,m_fTime);
           mode = GAME_MODE;
           break;
         case 8:
-          theGame.StartPractice(m_screenWidth,m_screenHeight,xOffset,yOffset,m_fTime);
+          theGame.StartPractice(width,height,xOffset,yOffset,m_fTime);
           mode = GAME_MODE;
           break;
         case 100: // Exit
@@ -287,16 +300,29 @@ int BlockOut::RestoreDeviceObjects()
 
     int availWidth, availHeight;
     SDL_GetWindowSize(m_screen, &availWidth, &availHeight);
-    int xOffset = (availWidth - m_screenWidth) / 2;
-    int yOffset = (availHeight - m_screenHeight) / 2;
+    
+    int width, height;
+    double xRatio = (double)availWidth / (double)m_screenWidth;
+    double yRatio = (double)availHeight / (double)m_screenHeight;
+    if ( xRatio < yRatio )
+    {
+      width = availWidth;
+      height = m_screenHeight * xRatio;
+    } else {
+      width = m_screenWidth * yRatio;
+      height = availHeight;
+    }
+  
+    int xOffset = (availWidth - width) / 2;
+    int yOffset = (availHeight - height) / 2;
 
-    m_pSmallFont.RestoreDeviceObjects(m_screenWidth,m_screenHeight);
+    m_pSmallFont.RestoreDeviceObjects(width,height);
 
     //Set clear color
     glClearColor( 0, 0, 0, 0 );
  
     // Set viewport
-    glViewport(0,0,m_screenWidth,m_screenHeight);
+    glViewport(0,0,width,height);
 
     //Compute view matrix (Right Handed)
     glMatrixMode( GL_MODELVIEW );
@@ -337,10 +363,10 @@ int BlockOut::RestoreDeviceObjects()
     }
     
     // Set up device objects
-    if( !theMenu.Create(m_screenWidth,m_screenHeight,xOffset,yOffset) )
+    if( !theMenu.Create(width,height,xOffset,yOffset) )
       return GL_FAIL;
 
-    if( !theGame.Create(m_screenWidth,m_screenHeight,xOffset,yOffset) )
+    if( !theGame.Create(width,height,xOffset,yOffset) )
       return GL_FAIL;
   
     theGame.SetViewMatrix(matView);
