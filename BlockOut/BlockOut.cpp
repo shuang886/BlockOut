@@ -372,22 +372,23 @@ int BlockOut::EventProc(SDL_Event *event)
   // Handle key presses
   if( event->type == SDL_KEYDOWN )
   {
-    int unicode = (event->key.keysym.sym & 0x7F);
-    if( unicode ) {
-      m_bKey[unicode] = 1;
-    } else {
-      switch (event->key.keysym.sym) {
-        case SDLK_F1:       m_bKey[BO_F1] = 1; break;
-        case SDLK_UP:       m_bKey[BO_UP] = 1; break;
-        case SDLK_DOWN:     m_bKey[BO_DOWN] = 1; break;
-        case SDLK_LEFT:     m_bKey[BO_LEFT] = 1; break;
-        case SDLK_RIGHT:    m_bKey[BO_RIGHT] = 1; break;
-        case SDLK_HOME:     m_bKey[BO_HOME] = 1; break;
-        case SDLK_END:      m_bKey[BO_END] = 1; break;
-        case SDLK_PAGEUP:   m_bKey[BO_PAGEUP] = 1; break;
-        case SDLK_PAGEDOWN: m_bKey[BO_PAGEDOWN] = 1; break;
-        case SDLK_DELETE:   m_bKey[BO_DELETE] = 1; break;
-      }
+    SDL_Keycode sym = event->key.keysym.sym;
+    switch (sym) {
+      case SDLK_F1:       m_bKey[BO_F1] = 1; break;
+      case SDLK_UP:       m_bKey[BO_UP] = 1; break;
+      case SDLK_DOWN:     m_bKey[BO_DOWN] = 1; break;
+      case SDLK_LEFT:     m_bKey[BO_LEFT] = 1; break;
+      case SDLK_RIGHT:    m_bKey[BO_RIGHT] = 1; break;
+      case SDLK_HOME:     m_bKey[BO_HOME] = 1; break;
+      case SDLK_END:      m_bKey[BO_END] = 1; break;
+      case SDLK_PAGEUP:   m_bKey[BO_PAGEUP] = 1; break;
+      case SDLK_PAGEDOWN: m_bKey[BO_PAGEDOWN] = 1; break;
+      case SDLK_DELETE:   m_bKey[BO_DELETE] = 1; break;
+      default:
+        if( sym < 0x80 )
+        {
+          m_bKey[sym] = 1;
+        }
     }
   }
 
