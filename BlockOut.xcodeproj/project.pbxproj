@@ -240,7 +240,7 @@
 		B04364452B125E55002AB585 /* libm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libm.tbd; path = usr/lib/libm.tbd; sourceTree = SDKROOT; };
 		B04364472B125E59002AB585 /* libdl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libdl.tbd; path = usr/lib/libdl.tbd; sourceTree = SDKROOT; };
 		B04364492B1260A9002AB585 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		B043644B2B1267A4002AB585 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		B043644B2B1267A4002AB585 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Credits.rtf; path = BlockOut/Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -831,7 +831,10 @@
 					"$(inherited)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = /opt/homebrew/include/SDL2;
+				HEADER_SEARCH_PATHS = (
+					/opt/homebrew/include/SDL2,
+					/usr/local/include/SDL2,
+				);
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.arcade-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -843,6 +846,7 @@
 					/opt/homebrew/lib,
 					/opt/homebrew/Cellar/sdl2_mixer/2.6.3_1/lib,
 					/opt/homebrew/Cellar/sdl2/2.28.5/lib,
+					/usr/local/lib,
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tampinco.BlockOut;
@@ -865,7 +869,10 @@
 					MACOS_BUNDLE,
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = /opt/homebrew/include/SDL2;
+				HEADER_SEARCH_PATHS = (
+					/opt/homebrew/include/SDL2,
+					/usr/local/include/SDL2,
+				);
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.arcade-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -877,6 +884,7 @@
 					/opt/homebrew/lib,
 					/opt/homebrew/Cellar/sdl2_mixer/2.6.3_1/lib,
 					/opt/homebrew/Cellar/sdl2/2.28.5/lib,
+					/usr/local/lib,
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tampinco.BlockOut;
