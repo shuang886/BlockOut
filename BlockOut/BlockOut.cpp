@@ -423,6 +423,10 @@ int BlockOut::EventProc(SDL_Event *event)
       default:
         if( sym < 0x80 )
         {
+          if( (SDL_GetModState() & KMOD_SHIFT) != 0 && islower(sym) )
+          {
+            sym = toupper(sym);
+          }
           m_bKey[sym] = 1;
         }
     }
