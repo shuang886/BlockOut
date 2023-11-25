@@ -34,10 +34,18 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#ifdef MACOS_BUNDLE
+#include <CoreFoundation/CoreFoundation.h>
 #endif
 
-static char bl2Home[512];
-static char usrHome[512];
+#endif
+
+#ifndef PATH_MAX
+#define PATH_MAX 512
+#endif
+
+static char bl2Home[PATH_MAX];
+static char usrHome[PATH_MAX];
 
 //-----------------------------------------------------------------------------
 // Name: v()
@@ -207,6 +215,7 @@ BOOL CheckEnv() {
     return FALSE;
   }
     
+#ifndef MACOS_BUNDLE
   char *blockoutHome = getenv("BL2_HOME");
   if( blockoutHome==NULL ) {
     printf("BL2_HOME environement variable if not defined !\n");
@@ -214,8 +223,18 @@ BOOL CheckEnv() {
     return FALSE;
   }
   strcpy( bl2Home , blockoutHome );
+#else // MACOS_BUNDLE
+  CFBundleRef mainBundle = CFBundleGetMainBundle();
+  CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+  CFURLRef absoluteResourcesURL = CFURLCopyAbsoluteURL(resourcesURL);
+  CFStringRef cfStr = CFURLCopyFileSystemPath(absoluteResourcesURL, kCFURLPOSIXPathStyle);
+  CFStringGetCString(cfStr, bl2Home, FILENAME_MAX, kCFStringEncodingASCII);
+  CFRelease(resourcesURL);
+  CFRelease(absoluteResourcesURL);
+  CFRelease(cfStr);
+#endif // MACOS_BUNDLE
     
-  char bl2Dir[512];
+  char bl2Dir[PATH_MAX];
   sprintf(bl2Dir,"%s/.bl2",homePath);
   if( !DirExists(bl2Dir) ) {
     // Create it
@@ -244,7 +263,7 @@ char *LID(char *fileName) {
   return fileName;
 #endif
 
-  static char ret[512];
+  static char ret[PATH_MAX];
   sprintf(ret,"%s/%s",bl2Home,fileName);
   return ret;
 
@@ -256,7 +275,7 @@ char *LID(char *fileName) {
 //-----------------------------------------------------------------------------
 char *LHD(char *fileName) {
 
-  static char ret[512];
+  static char ret[PATH_MAX];
 
 #ifdef WINDOWS
   if( strlen(usrHome)>0 ) {
