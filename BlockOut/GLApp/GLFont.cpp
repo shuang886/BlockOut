@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #undef LoadImage
-#include <CImage.h>
+#include "CImage.h"
 
 extern char *LID(char *fileName);
 

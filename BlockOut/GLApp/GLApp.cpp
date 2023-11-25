@@ -8,7 +8,7 @@
 #endif
 
 #undef LoadImage
-#include <CImage.h>
+#include "CImage.h"
 
 extern char *LID(char *fileName);
 

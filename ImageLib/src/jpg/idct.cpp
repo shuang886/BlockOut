@@ -67,7 +67,7 @@ void idct(BLOCK_TYPE *data, uchar *Pdst_ptr)
   int32 tmp0, tmp1, tmp2, tmp3;
   int32 tmp10, tmp11, tmp12, tmp13;
   int32 z1, z2, z3, z4, z5;
-  register BLOCK_TYPE *dataptr;
+  /* register */ BLOCK_TYPE *dataptr;
   int rowctr;
 
   dataptr = data;

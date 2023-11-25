@@ -20,7 +20,7 @@
 #include <time.h>
 #include <stdio.h>
 #undef LoadImage
-#include <CImage.h>
+#include "CImage.h"
 
 #ifdef WINDOWS
 
