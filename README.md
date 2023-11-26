@@ -15,13 +15,12 @@ This is a copy of BlockOut® II so I can attempt to port it to Apple operating s
 If unsure, this is probably the one you want.
 
 1. Use the [macos-sdl2](https://github.com/shuang886/BlockOut/tree/macos-sdl2) branch.
-2. `brew install SDL2 SDL2_mixer`
-3. Open the `BlockOut.xcodeproj` in Xcode.
-4. Build and run the "BlockOut" target.
+2. Download [SDL2.framework](https://github.com/libsdl-org/SDL/releases) and place it in a folder called `Frameworks` at the same level as the root directory of BlockOut.
+3. Download [SDL2_mixer.framework](https://github.com/libsdl-org/SDL_mixer/releases) and place it in a folder called `Frameworks` at the same level as the root directory of BlockOut.
+4. Open the `BlockOut.xcodeproj` in Xcode.
+5. Build and run the "BlockOut" target.
 
-This should also work for Intel Macs, but you'll at least need to change the "Header Search Paths" and "Library Search Paths" to from `/opt/homebrew/...` to `/usr/local/...` where Homebrew installs on Intel machines.
-
-The Cocoa app links SDL2 dependencies statically, so you can copy it to computers that do not have the Homebrew libraries.
+This produces a universal app suitable for both Apple Silicon and Intel Macs.
 
 ### SDL2 version command-line tool ported to macOS
 
@@ -59,6 +58,6 @@ The `main` branch preserves the original Release 2.5 of the game targeting Windo
 
 This is a list of possibilities, not promises:
 
-- [ ] Universal (Apple Silicon and Intel) app
+- [X] Universal (Apple Silicon and Intel) app
 - [ ] iOS app
 - [ ] Metal app (to replace deprecated OpenGL)
