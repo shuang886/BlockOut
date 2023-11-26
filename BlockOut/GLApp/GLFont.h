@@ -1,7 +1,7 @@
 // -----------------------------------------------
 // Simple 2D font
 // -----------------------------------------------
-#include "SDL_opengl.h"
+#include <SDL2/SDL_opengl.h>
 
 #ifndef _GLFONT2DH_
 #define _GLFONT2DH_

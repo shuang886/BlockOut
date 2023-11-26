@@ -99,13 +99,15 @@
 		B04364382B125AEC002AB585 /* zlib.h in Headers */ = {isa = PBXBuildFile; fileRef = B04364212B125AEC002AB585 /* zlib.h */; };
 		B043643C2B125B0E002AB585 /* libImageLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B04363C22B1259FE002AB585 /* libImageLib.a */; };
 		B043643E2B125D38002AB585 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B043643D2B125D38002AB585 /* OpenGL.framework */; };
-		B04364402B125D68002AB585 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B043643F2B125D68002AB585 /* libSDL2_mixer.a */; };
-		B04364422B125E08002AB585 /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364412B125E08002AB585 /* libSDL2.a */; };
 		B04364442B125E4D002AB585 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364432B125E4D002AB585 /* libpthread.tbd */; };
 		B04364462B125E55002AB585 /* libm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364452B125E55002AB585 /* libm.tbd */; };
 		B04364482B125E59002AB585 /* libdl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364472B125E59002AB585 /* libdl.tbd */; };
 		B043644A2B1260A9002AB585 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364492B1260A9002AB585 /* CoreFoundation.framework */; };
 		B043644C2B1267A4002AB585 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B043644B2B1267A4002AB585 /* Credits.rtf */; };
+		B04364672B12E671002AB585 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364642B12E66C002AB585 /* SDL2_mixer.framework */; };
+		B04364682B12E671002AB585 /* SDL2_mixer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B04364642B12E66C002AB585 /* SDL2_mixer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B04364692B12E673002AB585 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B04364632B12E66C002AB585 /* SDL2.framework */; };
+		B043646A2B12E673002AB585 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B04364632B12E66C002AB585 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,21 @@
 			remoteInfo = ImageLib;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B04364602B12E611002AB585 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B04364682B12E671002AB585 /* SDL2_mixer.framework in Embed Frameworks */,
+				B043646A2B12E673002AB585 /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B043633B2B125664002AB585 /* BlockOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlockOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +258,8 @@
 		B04364472B125E59002AB585 /* libdl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libdl.tbd; path = usr/lib/libdl.tbd; sourceTree = SDKROOT; };
 		B04364492B1260A9002AB585 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		B043644B2B1267A4002AB585 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Credits.rtf; path = BlockOut/Credits.rtf; sourceTree = "<group>"; };
+		B04364632B12E66C002AB585 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		B04364642B12E66C002AB585 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,13 +268,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B043643C2B125B0E002AB585 /* libImageLib.a in Frameworks */,
-				B04364422B125E08002AB585 /* libSDL2.a in Frameworks */,
-				B04364402B125D68002AB585 /* libSDL2_mixer.a in Frameworks */,
+				B04364672B12E671002AB585 /* SDL2_mixer.framework in Frameworks */,
 				B043643E2B125D38002AB585 /* OpenGL.framework in Frameworks */,
 				B043644A2B1260A9002AB585 /* CoreFoundation.framework in Frameworks */,
 				B04364482B125E59002AB585 /* libdl.tbd in Frameworks */,
 				B04364462B125E55002AB585 /* libm.tbd in Frameworks */,
 				B04364442B125E4D002AB585 /* libpthread.tbd in Frameworks */,
+				B04364692B12E673002AB585 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +291,8 @@
 		B04363322B125664002AB585 = {
 			isa = PBXGroup;
 			children = (
+				B04364642B12E66C002AB585 /* SDL2_mixer.framework */,
+				B04364632B12E66C002AB585 /* SDL2.framework */,
 				B043633D2B125664002AB585 /* BlockOut */,
 				B04363BA2B125967002AB585 /* ImageLib */,
 				B043633C2B125664002AB585 /* Products */,
@@ -524,6 +545,7 @@
 				B04363372B125664002AB585 /* Sources */,
 				B04363382B125664002AB585 /* Frameworks */,
 				B04363392B125664002AB585 /* Resources */,
+				B04364602B12E611002AB585 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -823,6 +845,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = ../Frameworks;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					_DEBUG,
 					"DEBUG=1",
@@ -831,10 +854,6 @@
 					"$(inherited)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					/opt/homebrew/include/SDL2,
-					/usr/local/include/SDL2,
-				);
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.arcade-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -842,10 +861,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/opt/homebrew/lib,
-					/usr/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tampinco.BlockOut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -862,15 +878,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = ../Frameworks;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					linux,
 					MACOS_BUNDLE,
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					/opt/homebrew/include/SDL2,
-					/usr/local/include/SDL2,
-				);
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.arcade-games";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -878,10 +891,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/opt/homebrew/lib,
-					/usr/local/lib,
-				);
+				LIBRARY_SEARCH_PATHS = "";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tampinco.BlockOut;
 				PRODUCT_NAME = "$(TARGET_NAME)";

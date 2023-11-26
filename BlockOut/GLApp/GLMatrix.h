@@ -1,7 +1,7 @@
 // -------------------------------------
 // 3x3 Matrix class
 // -------------------------------------
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
 
 #ifndef _GLMATRIXH_
 #define _GLMATRIXH_

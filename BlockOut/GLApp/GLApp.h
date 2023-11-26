@@ -2,8 +2,8 @@
 // SDL/OpenGL OpenGL application framework
 // Jean-Luc PONS (2007)
 // -------------------------------------------
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
 #include <string.h>
 #include <stdlib.h>
 
