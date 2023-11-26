@@ -10,7 +10,7 @@ This is a copy of BlockOut® II so I can attempt to port it to Apple operating s
 
 ## Compiling
 
-### SDL2 Universal Cocoa App
+### SDL2-based universal Cocoa app
 
 If unsure, this is probably the one you want.
 
@@ -22,7 +22,7 @@ If unsure, this is probably the one you want.
 
 This produces a universal app suitable for both Apple Silicon and Intel Macs.
 
-### SDL2 version command-line tool ported to macOS
+### SDL2-based command-line tool ported to macOS
 
 SDL1.2 is now over ten years old and was deprecated years ago, so I've upgraded the code to SDL2. Use the [macos-sdl2](https://github.com/shuang886/BlockOut/tree/macos-sdl2) branch.
 
@@ -36,7 +36,7 @@ export BL2_HOME=[folder where `images` and `sounds` folders are]
 ./blockout
 ```
 
-### SDL version command-line tool ported to macOS
+### SDL1.2-based command-line tool ported to macOS
 
 Use the [macos](https://github.com/shuang886/BlockOut/tree/macos) branch.
 
