@@ -10,7 +10,7 @@ This is a copy of BlockOut® II so I can attempt to port it to Apple operating s
 
 ## Compiling
 
-### SDL2 Cocoa App for Apple Silicon
+### SDL2 Universal Cocoa App
 
 If unsure, this is probably the one you want.
 
